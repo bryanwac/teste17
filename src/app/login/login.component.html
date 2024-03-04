@@ -1,0 +1,90 @@
+<div class="container">
+   <div class="d-flex flex-column">
+      <mat-card>
+         <div class="d-flex flex-row justify-content-center align-itens-center mt-2" style="border: none;">
+            <mat-button-toggle-group #group="matButtonToggleGroup" name="painel" aria-label="Painel">
+               <mat-button-toggle style="width: 15vw;" value="login">Login</mat-button-toggle>
+               <mat-button-toggle style="width: 15vw;" value="registro">Registro</mat-button-toggle>
+            </mat-button-toggle-group>
+         </div>
+
+         <mat-card-header class="d-flex justify-content-center align-itens-center">
+            <mat-card-title>
+               @if (group.value == 'login' && !logou) {
+               Login
+               } @else if (group.value == 'registro' && !logou){
+               Registro
+               }
+            </mat-card-title>
+         </mat-card-header>
+         @if (group.value == 'login') {
+         @if (logou) {
+         <div class="d-flex flex-row justify-content-center align-itens-center" style="margin-top: 8vh;">
+            <mat-icon aria-hidden="false" style="color: green;" fontIcon="check"></mat-icon> Login efetuado com sucesso
+         </div>
+            @if (showRedirectMsg) {
+               <div class="d-flex flex-row justify-content-center align-itens-center" style="margin-top: 8vh;">
+                  <mat-icon aria-hidden="false" style="color: green;" fontIcon="link"></mat-icon> Acessando painel principal
+               </div>
+            }
+         }
+
+         @if (loading && !logou) {
+         <div class="d-flex flex-row justify-content-center align-itens-center mt-4">
+            <mat-spinner></mat-spinner>
+         </div>
+         } @else {
+         @if (!logou) {
+
+         <mat-card-content class="d-flex flex-row justify-content-center align-itens-center">
+
+            <form [formGroup]="formularioLogin" class="d-flex flex-column justify-content-center align-itens-center">
+               <mat-form-field appearance="outline">
+                  <mat-label>Usuário</mat-label>
+                  <input matInput type="text" name="usuario" id="usuario" formControlName="usuario">
+               </mat-form-field>
+
+               <mat-form-field appearance="outline">
+                  <mat-label>Senha</mat-label>
+                  <input matInput type="text" name="usuario" id="usuario" formControlName="senha">
+               </mat-form-field>
+
+            </form>
+
+         </mat-card-content>
+
+         <mat-card-actions class="d-flex flex-row justify-content-center align-itens-center">
+            <button mat-raised-button style="width: 10vw; height: 5vh; background-color: lightblue; color: white;"
+               (click)="login()">LOGIN</button>
+         </mat-card-actions>
+         }
+         }
+
+         <div class="mt-4">
+            @if (formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched) {
+            <mat-error> * Usuário inválido ou em branco</mat-error>
+            }
+            @if (formularioLogin.get('senha')?.invalid && formularioLogin.get('senha')?.touched) {
+            <mat-error> * Senha inválida ou em branco</mat-error>
+            }
+         </div>
+
+         } @else if(group.value == 'registro'){
+         <mat-card-header>
+            <mat-card-title>Registro</mat-card-title>
+         </mat-card-header>
+
+         <mat-card-content>
+            <p>
+               The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+               A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+               bred for hunting.
+            </p>
+         </mat-card-content>
+         <mat-card-actions></mat-card-actions>
+         }
+      </mat-card>
+
+   </div>
+
+</div>

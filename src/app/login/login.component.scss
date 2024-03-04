@@ -1,0 +1,24 @@
+.container {
+   height: 100vh !important;
+   width: 100vw !important;
+   background-color: lightblue;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+}
+
+mat-card {
+   width: 50vh;
+   height: 45vh;
+}
+
+mat-button-toggle-group {
+   border: none;
+}
+
+@media (min-width: 576px) {
+   .container {
+      max-width: 100%;
+   }
+}
